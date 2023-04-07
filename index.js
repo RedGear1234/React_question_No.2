@@ -17,7 +17,7 @@ app.post("/login", (req, res) => {
   } else {
     res.json({ valid: false });
   }
-});
+})
 
 app.listen("3000", () => {
   console.log(`listing on port 3000`);
