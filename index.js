@@ -1,13 +1,24 @@
+const express = require("express");
+const app = express();
+app.use(express.json());
 
-const express = require("express")
+function authenticateUser(username, password) {
+  const vaildUserName = "shubham";
+  const vaildPassword = "1234";
+  return username === vaildUserName && password === vaildPassword;
+}
 
-const app = express()
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  const auth = authenticateUser(username, password);
 
+  if (auth) {
+    res.json({ valid: true });
+  } else {
+    res.json({ valid: false });
+  }
+});
 
-app.get('https://63a415ae821953d4f2a8d860.mockapi.io/users', (req, res)=>{
-  console.log(req)
-})
-
-app.listen("3000", () =>{
-  console.log(`listing on port 3000`)
-})
+app.listen("3000", () => {
+  console.log(`listing on port 3000`);
+});
